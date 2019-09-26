@@ -6,7 +6,7 @@
 <html>
 
 <head>
-	<title>List Customers</title>
+	<title>List Teachers</title>
 	
 	<!-- reference our style sheet -->
 
@@ -20,7 +20,7 @@
 
 	<div id="wrapper">
 		<div id="header">
-			<h2>CRM - Children Relationship Manager</h2>
+			<h2>TRM - Teachers Relationship Manager</h2>
 		</div>
 	</div>
 	
@@ -30,14 +30,14 @@
 		
 			<!-- put new button: Add Child -->
 		
-			<input type="button" value="Add Child"
+			<input type="button" value="Add Teacher"
 				   onclick="window.location.href='showFormForAdd'; return false;"
 				   class="add-button"
 			/>
 
 			<!--  add a search box -->
 			<form:form action="search" method="GET">
-                Search child: <input type="text" name="theSearchName" />
+                Search teacher: <input type="text" name="theSearchName" />
 
 				<input type="submit" value="Search" class="add-button" />
 			</form:form>
@@ -49,34 +49,32 @@
 					<th>First Name</th>
 					<th>Last Name</th>
 					<th>PESEL</th>
-					<th>Date of birth</th>
 					<th>Action</th>
 				</tr>
 				
 				<!-- loop over and print our customers -->
-				<c:forEach var="tempChild" items="${children}">
+				<c:forEach var="tempTeacher" items="${teachers}">
 					
 					<!-- construct an update link with child id -->
-					<c:url var="updateLink" value="/child/showFormForUpdate">
-						<c:param name="childId" value="${tempChild.id }"/>
+					<c:url var="updateLink" value="/teacher/showFormForUpdate">
+						<c:param name="teacherId" value="${tempTeacher.id }"/>
 					</c:url>
 					
 					<!-- construct delete link with child id -->
-					<c:url var="deleteLink" value="/child/delete">
-						<c:param name="childId" value="${tempChild.id }" />
+					<c:url var="deleteLink" value="/teacher/delete">
+						<c:param name="teacherId" value="${tempTeacher.id }" />
 					</c:url>
 
 					<tr>
-						<td> ${tempChild.firstName}</td>
-						<td> ${tempChild.lastName}</td>
-						<td> ${tempChild.pesel}</td>
-						<td> ${tempChild.dateOfBirth}</td>
+						<td> ${tempTeacher.firstName}</td>
+						<td> ${tempTeacher.lastName}</td>
+						<td> ${tempTeacher.pesel}</td>
 						<td>
 							<!-- displaying the update link  -->
 							<a href="${updateLink}">Update</a>
 							|
 						<a href="${deleteLink}"
-							   onclick="if (!(confirm('Are you sure you want to delete this child?'))) return false">Delete</a>
+							   onclick="if (!(confirm('Are you sure you want to delete this teacher?'))) return false">Delete</a>
 						</td>
 						
 					</tr>
