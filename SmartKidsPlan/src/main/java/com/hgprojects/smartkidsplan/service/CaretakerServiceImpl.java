@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.hgprojects.smartkidsplan.dao.CaretakerDAO;
 import com.hgprojects.smartkidsplan.entity.Caretaker;
+import com.hgprojects.smartkidsplan.entity.Child;
 
 @Service
 public class CaretakerServiceImpl implements CaretakerService {
@@ -45,6 +46,12 @@ public class CaretakerServiceImpl implements CaretakerService {
 	@Transactional
 	public List<Caretaker> searchCaretaker(String theSearchName) {
 		return caretakerDAO.searchCaretaker(theSearchName);
+	}
+
+	@Override
+	@Transactional
+	public List<Child> getChildren(int theId) {
+		return caretakerDAO.getChildren(theId);
 	}
 
 }

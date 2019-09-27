@@ -66,6 +66,10 @@
 						<c:param name="caretakerId" value="${tempCaretaker.id }" />
 					</c:url>
 
+					<c:url var="addChildLink" value="/caretaker/showFormForAddChild">
+						<c:param name="caretakerId" value="${tempCaretaker.id }" />
+					</c:url>
+
 					<tr>
 						<td> ${tempCaretaker.firstName}</td>
 						<td> ${tempCaretaker.lastName}</td>
@@ -77,6 +81,8 @@
 							|
 						<a href="${deleteLink}"
 							   onclick="if (!(confirm('Are you sure you want to delete this caretaker?'))) return false">Delete</a>
+							|
+							<a href="${addChildLink}">Add Child</a>
 						</td>
 						
 					</tr>

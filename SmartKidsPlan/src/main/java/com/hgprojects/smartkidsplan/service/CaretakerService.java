@@ -3,6 +3,7 @@ package com.hgprojects.smartkidsplan.service;
 import java.util.List;
 
 import com.hgprojects.smartkidsplan.entity.Caretaker;
+import com.hgprojects.smartkidsplan.entity.Child;
 
 public interface CaretakerService {
 
@@ -15,4 +16,6 @@ public interface CaretakerService {
 	public void deleteCaretaker(int theId);
 
 	public List<Caretaker> searchCaretaker(String theSearchName);
+
+	public List<Child> getChildren(int theId);
 }

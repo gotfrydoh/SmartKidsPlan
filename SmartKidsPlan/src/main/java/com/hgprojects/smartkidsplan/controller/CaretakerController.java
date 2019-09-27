@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.hgprojects.smartkidsplan.entity.Caretaker;
+import com.hgprojects.smartkidsplan.entity.Child;
 import com.hgprojects.smartkidsplan.service.CaretakerService;
 
 @Controller
@@ -66,6 +67,15 @@ public class CaretakerController {
 		theModel.addAttribute("caretakers", theCaretakers);
 		return "list-caretakers";
 	}
+	
+	@GetMapping("/showFormForAddChild")
+	public String showFormForAddChild(@RequestParam("caretakerId") int theId, Model theModel) {
+		//getting children of caretaker with this id
+		List<Child> children = caretakerService.getChildren(theId);
+		theModel.addAttribute("caretakerChildren", children);
+		return "caretaker-children";
+	}
+	
 	
 	
 }

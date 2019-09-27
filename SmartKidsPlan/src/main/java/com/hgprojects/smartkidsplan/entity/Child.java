@@ -1,6 +1,7 @@
 package com.hgprojects.smartkidsplan.entity;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.*;
 
@@ -25,6 +26,20 @@ public class Child {
 	@Column(name="date_of_birth")
 	private Date dateOfBirth;
 	
+	@ManyToMany(fetch=FetchType.LAZY, cascade={CascadeType.PERSIST, CascadeType.DETACH,CascadeType.MERGE,CascadeType.REFRESH})
+	@JoinTable(
+			name="caretaker_child",
+			joinColumns=@JoinColumn(name="child_id"),
+			inverseJoinColumns=@JoinColumn(name="caretaker_id")
+			)
+	private List<Caretaker> caretakers;
+	
+	
+	
+	
+	
+	
+	
 	
 	public Child() {
 		
@@ -39,7 +54,16 @@ public class Child {
 		this.dateOfBirth = dateOfBirth;
 	}
 
+	
 
+	public List<Caretaker> getCaretakers() {
+		return caretakers;
+	}
+
+
+	public void setCaretakers(List<Caretaker> caretakers) {
+		this.caretakers = caretakers;
+	}
 
 
 	public int getId() {

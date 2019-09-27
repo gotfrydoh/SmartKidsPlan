@@ -60,7 +60,7 @@ public class CaretakerDAOImpl implements CaretakerDAO {
 
 	@Override
 	public List<Caretaker> searchCaretaker(String theSearchName) {
-Session currentSession = sessionFactory.getCurrentSession();
+		Session currentSession = sessionFactory.getCurrentSession();
 		
 		Query theQuery = null;
 		
@@ -77,6 +77,15 @@ Session currentSession = sessionFactory.getCurrentSession();
 		List<Caretaker> caretakers = theQuery.getResultList();
 		
 		return caretakers;
+	}
+
+
+	@Override
+	public List<Child> getChildren(int theId) {
+		Session currentSession = sessionFactory.getCurrentSession();
+		Caretaker theCaretaker = currentSession.get(Caretaker.class, theId);
+		List<Child> children = theCaretaker.getChildren();
+		return children;
 	}
 
 }
