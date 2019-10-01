@@ -82,7 +82,7 @@
 						<a href="${deleteLink}"
 							   onclick="if (!(confirm('Are you sure you want to delete this caretaker?'))) return false">Delete</a>
 							|
-							<a href="${addChildLink}">Add Child</a>
+							<a href="${addChildLink}">Children</a>
 						</td>
 						
 					</tr>

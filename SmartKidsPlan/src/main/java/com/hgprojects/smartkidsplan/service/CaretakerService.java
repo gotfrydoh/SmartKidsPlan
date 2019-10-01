@@ -18,4 +18,10 @@ public interface CaretakerService {
 	public List<Caretaker> searchCaretaker(String theSearchName);
 
 	public List<Child> getChildren(int theId);
+
+	public void addChildToCaretaker(int caretakerId, int childId);
+
+	public void removeChildFromCaretaker(int caretakerId, int childId);
+
+
 }

@@ -58,7 +58,18 @@ public class Caretaker {
 			children = new ArrayList<>();
 		}
 		children.add(theChild);
+	}
+	
+	public void removeChild(Child theChild) {
 		
+		if(children!=null) {
+			for(int i=0; i<children.size(); i++) {
+				if(theChild.getId()==children.get(i).getId()) {
+					children.remove(i);
+					i--;
+				}
+			}
+		}
 	}
 	
 	

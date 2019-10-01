@@ -37,10 +37,6 @@ public class Child {
 	
 	
 	
-	
-	
-	
-	
 	public Child() {
 		
 	}
@@ -55,7 +51,7 @@ public class Child {
 	}
 
 	
-
+	
 	public List<Caretaker> getCaretakers() {
 		return caretakers;
 	}
