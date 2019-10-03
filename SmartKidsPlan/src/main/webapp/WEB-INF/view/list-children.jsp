@@ -65,6 +65,11 @@
 					<c:url var="deleteLink" value="/child/delete">
 						<c:param name="childId" value="${tempChild.id }" />
 					</c:url>
+					
+					<!-- construct an parents' link with child id -->
+					<c:url var="childCaretakersLink" value="/child/getChildCaretakers">
+						<c:param name="childId" value="${tempChild.id }"/>
+					</c:url>
 
 					<tr>
 						<td> ${tempChild.firstName}</td>
@@ -72,11 +77,10 @@
 						<td> ${tempChild.pesel}</td>
 						<td> ${tempChild.dateOfBirth}</td>
 						<td>
-							<!-- displaying the update link  -->
-							<a href="${updateLink}">Update</a>
-							|
-						<a href="${deleteLink}"
-							   onclick="if (!(confirm('Are you sure you want to delete this child?'))) return false">Delete</a>
+							<!-- displaying the update link  --> <a href="${updateLink}">Update</a>
+							| <a href="${deleteLink}"
+							onclick="if (!(confirm('Are you sure you want to delete this child?'))) return false">Delete</a>
+							| <a href="${childCaretakersLink}">Caretakers</a>
 						</td>
 						
 					</tr>

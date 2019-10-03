@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.hgprojects.smartkidsplan.dao.ChildDAO;
+import com.hgprojects.smartkidsplan.entity.Caretaker;
 import com.hgprojects.smartkidsplan.entity.Child;
 
 @Service
@@ -46,6 +47,13 @@ public class ChildServiceImpl implements ChildService {
 	@Transactional
 	public List<Child> searchChild(String theSearchName) {
 		return childDAO.searchChild(theSearchName);
+	}
+
+	@Override
+	@Transactional
+	public List<Caretaker> getChildCaretakers(int theId) {
+		Child theChild = childDAO.getChild(theId);
+		return theChild.getCaretakers();
 	}
 
 }

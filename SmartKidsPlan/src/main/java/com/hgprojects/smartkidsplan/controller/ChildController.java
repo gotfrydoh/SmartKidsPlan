@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.hgprojects.smartkidsplan.entity.Caretaker;
 import com.hgprojects.smartkidsplan.entity.Child;
 import com.hgprojects.smartkidsplan.service.ChildService;
 
@@ -77,6 +78,14 @@ public class ChildController {
 		List<Child> theChildren = childService.searchChild(theSearchName);
 		theModel.addAttribute("children",theChildren);
 		return "list-children";
+	}
+
+	
+	@GetMapping("/getChildCaretakers")
+	public String getChildCaretakers(@RequestParam("childId") int theId, Model theModel) {
+		List<Caretaker> theCaretakers = childService.getChildCaretakers(theId);
+		theModel.addAttribute("caretakersOfChild",theCaretakers);
+		return "caretakers-of-child";
 	}
 	
 }
