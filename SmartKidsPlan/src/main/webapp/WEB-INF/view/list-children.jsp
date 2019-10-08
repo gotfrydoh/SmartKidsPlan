@@ -1,5 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -76,6 +77,8 @@
 						<td> ${tempChild.lastName}</td>
 						<td> ${tempChild.pesel}</td>
 						<td> ${tempChild.dateOfBirth}</td>
+						
+						
 						<td>
 							<!-- displaying the update link  --> <a href="${updateLink}">Update</a>
 							| <a href="${deleteLink}"
@@ -92,7 +95,9 @@
 		</div>
 	
 	</div>
-	
+	<p>
+		<a href="${pageContext.request.contextPath}">Dashboard</a>
+	</p>
 
 </body>
 

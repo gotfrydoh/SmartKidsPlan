@@ -55,13 +55,18 @@
 				<!-- loop over and print our customers -->
 				<c:forEach var="tempTeacher" items="${teachers}">
 					
-					<!-- construct an update link with child id -->
+					<!-- construct an update link with teacher id -->
 					<c:url var="updateLink" value="/teacher/showFormForUpdate">
 						<c:param name="teacherId" value="${tempTeacher.id }"/>
 					</c:url>
 					
-					<!-- construct delete link with child id -->
+					<!-- construct delete link with teacher id -->
 					<c:url var="deleteLink" value="/teacher/delete">
+						<c:param name="teacherId" value="${tempTeacher.id }" />
+					</c:url>
+					
+					<!-- construct add group link with teacher id -->
+					<c:url var="groupLink" value="/teacher/showFormForAddGroup">
 						<c:param name="teacherId" value="${tempTeacher.id }" />
 					</c:url>
 
@@ -75,6 +80,8 @@
 							|
 						<a href="${deleteLink}"
 							   onclick="if (!(confirm('Are you sure you want to delete this teacher?'))) return false">Delete</a>
+							   |
+							   <a href="${groupLink}">Add Group</a>
 						</td>
 						
 					</tr>
@@ -86,7 +93,9 @@
 		</div>
 	
 	</div>
-	
+	<p>
+		<a href="${pageContext.request.contextPath}">Dashboard</a>
+	</p>
 
 </body>
 

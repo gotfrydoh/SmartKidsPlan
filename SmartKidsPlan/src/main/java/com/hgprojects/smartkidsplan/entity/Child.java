@@ -1,9 +1,12 @@
 package com.hgprojects.smartkidsplan.entity;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
 import javax.persistence.*;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name="child")
@@ -24,6 +27,8 @@ public class Child {
 	private int pesel;
 	
 	@Column(name="date_of_birth")
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern = "yyyy/MM/dd")
 	private Date dateOfBirth;
 	
 	@ManyToMany(fetch=FetchType.EAGER, cascade={CascadeType.PERSIST, CascadeType.DETACH,CascadeType.MERGE,CascadeType.REFRESH})
@@ -59,6 +64,18 @@ public class Child {
 
 	public void setCaretakers(List<Caretaker> caretakers) {
 		this.caretakers = caretakers;
+	}
+
+	
+
+
+	public Date getDateOfBirth() {
+		return dateOfBirth;
+	}
+
+
+	public void setDateOfBirth(Date dateOfBirth) {
+		this.dateOfBirth = dateOfBirth;
 	}
 
 
@@ -102,14 +119,7 @@ public class Child {
 	}
 
 
-	public Date getDateOfBirth() {
-		return dateOfBirth;
-	}
 
-
-	public void setDateOfBirth(Date dateOfBirth) {
-		this.dateOfBirth = dateOfBirth;
-	}
 
 
 	@Override

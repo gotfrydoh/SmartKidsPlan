@@ -1,10 +1,16 @@
 package com.hgprojects.smartkidsplan.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -25,12 +31,21 @@ public class Teacher {
 	@Column(name="pesel")
 	private int pesel;
 
+	@OneToMany(mappedBy="teacher",fetch=FetchType.EAGER, cascade={CascadeType.PERSIST, CascadeType.DETACH,CascadeType.MERGE,CascadeType.REFRESH})
+	private List<Group> groups;
 
 	public Teacher() {
 		
 	}
 	
-	
+
+	public void addGroup(Group tempSession) {
+		if(groups == null) {
+			groups = new ArrayList<>();
+		}
+		groups.add(tempSession);
+		tempSession.setTeacher(this);
+	}
 
 	public Teacher(String firstName, String lastName, int pesel) {
 		super();
@@ -40,6 +55,15 @@ public class Teacher {
 	}
 
 
+
+	public List<Group> getGroups() {
+		return groups;
+	}
+
+
+	public void setGroups(List<Group> groups) {
+		this.groups = groups;
+	}
 
 
 	public int getId() {

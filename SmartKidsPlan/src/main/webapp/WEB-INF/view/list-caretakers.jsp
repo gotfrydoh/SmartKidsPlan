@@ -94,7 +94,9 @@
 		</div>
 	
 	</div>
-	
+	<p>
+		<a href="${pageContext.request.contextPath}">Dashboard</a>
+	</p>
 
 </body>
 
