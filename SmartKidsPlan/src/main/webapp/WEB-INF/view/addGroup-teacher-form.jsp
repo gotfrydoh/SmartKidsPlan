@@ -35,27 +35,29 @@
 				<tr>
 					<th>Day of week</th>
 					<th>Start Time</th>
-					<th>End Time </th>
+					<th>End Time</th>
 					<th>Action</th>
 				</tr>
 
 				<!-- loop over and print our customers -->
 				<c:forEach var="tempGroup" items="${teacherGroups}">
-					
-					<c:url var="removeGroupFromTeacherLink" value="/teacher/removeGroupFromTeacher">
+
+					<c:url var="removeGroupFromTeacherLink"
+						value="/teacher/removeGroupFromTeacher">
 						<c:param name="teacherId" value="${tempGroup.teacher.id }" />
 						<c:param name="groupId" value="${tempGroup.id}" />
 					</c:url>
-					
+
 					<tr>
 						<td>${tempGroup.dayOfWeek}</td>
 						<td>${tempGroup.startTime}</td>
 						<td>${tempGroup.endTime}</td>
-						
+
 						<td>
-							<!-- displaying the delete link  -->
-							<a href="${removeGroupFromTeacherLink}" onclick="if (!(confirm('Are you sure you want to delete this group from this particular teacher?'))) return false">Remove</a>
-					
+							<!-- displaying the delete link  --> <a
+							href="${removeGroupFromTeacherLink}"
+							onclick="if (!(confirm('Are you sure you want to delete this group from this particular teacher?'))) return false">Remove</a>
+
 						</td>
 					</tr>
 
@@ -75,17 +77,18 @@
 				<tr>
 					<th>Day of week</th>
 					<th>Start Time</th>
-					<th>End Time </th>
+					<th>End Time</th>
 					<th>Action</th>
 				</tr>
-				
-				
+
+
 				<!-- loop over and print our children -->
 				<c:forEach var="tempGroup" items="${allGroups}">
-				
-				
-					<c:url var="addGroupToTeacherLink" value="/teacher/addGroupToTeacher">
-						<c:param name="teacherId" value="${tempGroup.teacher.id }" />
+
+
+					<c:url var="addGroupToTeacherLink"
+						value="/teacher/addGroupToTeacher">
+						<c:param name="teacherId" value="${theTeacher.id }" />
 						<c:param name="groupId" value="${tempGroup.id}" />
 					</c:url>
 
@@ -94,15 +97,16 @@
 						<td>${tempGroup.startTime}</td>
 						<td>${tempGroup.endTime}</td>
 						<td>
-							<!-- displaying the update link  -->
-							<a href="${addGroupToTeacherLink}" onclick="if (!(confirm('Are you sure you want to add this group to this particular teacher?'))) return false">Add</a>
-					
+							<!-- displaying the update link  --> <a
+							href="${addGroupToTeacherLink}"
+							onclick="if (!(confirm('Are you sure you want to add this group to this particular teacher?'))) return false">Add</a>
+
 						</td>
-						
+
 					</tr>
-				
+
 				</c:forEach>
-				
+
 			</table>
 
 
@@ -112,7 +116,9 @@
 
 
 
-
+	<p>
+		<a href="${pageContext.request.contextPath}">Dashboard</a>
+	</p>
 
 </body>
 

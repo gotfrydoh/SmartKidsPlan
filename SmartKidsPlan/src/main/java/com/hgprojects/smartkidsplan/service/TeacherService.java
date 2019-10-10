@@ -16,4 +16,8 @@ public interface TeacherService {
 	public void deleteTeacher(int theId);
 
 	public List<Teacher> searchTeacher(String theSearchName);
+
+	public void addGroupToTeacher(int teacherId, int groupId);
+
+	public void removeGroupFromTeacher(int teacherId, int groupId);
 }

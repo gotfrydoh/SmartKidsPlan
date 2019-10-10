@@ -32,6 +32,14 @@ public class GroupDAOImpl implements GroupDAO {
 		currentSession.saveOrUpdate(theGroup);
 	}
 
+
+	@Override
+	public Group getGroup(int groupId) {
+		Session currentSession = sessionFactory.getCurrentSession();
+		Group theGroup = currentSession.get(Group.class, groupId);
+		return theGroup;
+	}
+
 	
 	
 	

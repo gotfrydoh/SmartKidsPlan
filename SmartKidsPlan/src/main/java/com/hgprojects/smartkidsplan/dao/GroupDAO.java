@@ -9,4 +9,6 @@ public interface GroupDAO {
 	public List<Group> getGroups();
 
 	public void saveGroup(Group theGroup);
+
+	public Group getGroup(int groupId);
 }

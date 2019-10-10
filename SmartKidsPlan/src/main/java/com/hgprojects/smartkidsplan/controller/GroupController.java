@@ -46,7 +46,7 @@ public class GroupController {
 	@PostMapping("/saveGroup")
 	public String saveGroup(@ModelAttribute("group") Group theGroup) {
 		groupService.saveGroup(theGroup);
-		return "redirect:.group/list";
+		return "redirect:/group/list";
 	}
 	
 	

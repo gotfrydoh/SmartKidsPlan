@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.hgprojects.smartkidsplan.entity.Group;
 import com.hgprojects.smartkidsplan.entity.Teacher;
@@ -90,9 +91,24 @@ public class TeacherController {
 		}
 		theModel.addAttribute("allGroups",allGroups);
 		theModel.addAttribute("teacherGroups",teacherGroups);
+		theModel.addAttribute("theTeacher", theTeacher);
 		return "addGroup-teacher-form";
 	}
 	
 	
+	@GetMapping("/addGroupToTeacher")
+	public String addGroupToTeacher(@RequestParam("teacherId") int teacherId, @RequestParam("groupId") int groupId, Model theModel,RedirectAttributes redirectAttrs) {
+		teacherService.addGroupToTeacher(teacherId,groupId);
+		redirectAttrs.addAttribute("teacherId",teacherId);
+		return "redirect:/teacher/showFormForAddGroup?teacherId={teacherId}";
+	}
+	
+	
+	@GetMapping("/removeGroupFromTeacher")
+	public String removeGroupFromTeacher(@RequestParam("teacherId") int teacherId, @RequestParam("groupId") int groupId, Model theModel, RedirectAttributes redirectAttrs) {
+		teacherService.removeGroupFromTeacher(teacherId,groupId);
+		redirectAttrs.addAttribute("teacherId", teacherId);
+		return "redirect:/teacher/showFormForAddGroup?teacherId={teacherId}";
+	}
 	
 }

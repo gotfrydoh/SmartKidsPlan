@@ -46,6 +46,19 @@ public class Teacher {
 		groups.add(tempSession);
 		tempSession.setTeacher(this);
 	}
+	
+	
+	public void removeGroup(Group tempGroup) {
+		if(groups != null) {
+			for(int i=0;i<groups.size();i++) {
+				if(tempGroup.getId() == groups.get(i).getId()) {
+					tempGroup.setTeacher(null);
+					groups.remove(i);
+					i--;
+				}
+			}
+		}
+	}
 
 	public Teacher(String firstName, String lastName, int pesel) {
 		super();
