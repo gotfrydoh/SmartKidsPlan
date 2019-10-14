@@ -63,7 +63,7 @@ public class GroupDAOImpl implements GroupDAO {
 			//theSearchName is empty so get all groups
 			theQuery=currentSession.createQuery("from Group", Group.class);
 		}
-		//execute the query
+		//execute the queryy
 		List<Group> groups = theQuery.getResultList();
 		return groups;
 	}
