@@ -40,6 +40,34 @@ public class GroupDAOImpl implements GroupDAO {
 		return theGroup;
 	}
 
+
+	@Override
+	public void deleteGroup(int groupId) {
+		Session currentSession = sessionFactory.getCurrentSession();
+		Query theQuery = currentSession.createQuery("delete from Group where id=:groupId");
+		theQuery.setParameter("groupId", groupId);
+		theQuery.executeUpdate();		
+	}
+
+
+	@Override
+	public List<Group> searchGroup(String theSearchName) {
+		Session currentSession = sessionFactory.getCurrentSession();
+		Query theQuery = null;
+		
+		if(theSearchName != null && theSearchName.trim().length() > 0) {
+			theQuery = currentSession.createQuery("from Group where lower(teacher.firstName) like :theName or lower(teacher.lastName) like :theName",Group.class);
+			theQuery.setParameter("theName", "%"+theSearchName.toLowerCase()+"%");
+		}
+		else {
+			//theSearchName is empty so get all groups
+			theQuery=currentSession.createQuery("from Group", Group.class);
+		}
+		//execute the query
+		List<Group> groups = theQuery.getResultList();
+		return groups;
+	}
+
 	
 	
 	

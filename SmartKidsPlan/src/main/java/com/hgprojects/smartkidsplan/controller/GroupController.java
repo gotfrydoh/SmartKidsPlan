@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.hgprojects.smartkidsplan.entity.Group;
 import com.hgprojects.smartkidsplan.entity.Teacher;
@@ -48,6 +49,31 @@ public class GroupController {
 		groupService.saveGroup(theGroup);
 		return "redirect:/group/list";
 	}
+	
+	
+	@GetMapping("/delete")
+	public String delete(@RequestParam("groupId") int groupId) {
+		groupService.deleteGroup(groupId);
+		return "redirect:/group/list";
+	}
+	
+	
+	@GetMapping("/showFormForUpdate")
+	public String showFormForUpdate(@RequestParam("groupId") int groupId, Model theModel) {
+		Group theGroup = groupService.getGroup(groupId);
+		List<Teacher> theTeachers = teacherService.getTeachers();
+		theModel.addAttribute("group", theGroup);
+		theModel.addAttribute("teachers",theTeachers);
+		return "group-form";
+	}
+	
+	@GetMapping("/search")
+	public String searchGroup(@RequestParam("theSearchName") String theSearchName, Model theModel) {
+		List<Group> groups = groupService.searchGroup(theSearchName);
+		theModel.addAttribute("groups", groups);
+		return "list-groups";
+	}
+	
 	
 	
 }

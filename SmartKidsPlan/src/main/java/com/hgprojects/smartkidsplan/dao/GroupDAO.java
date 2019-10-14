@@ -11,4 +11,8 @@ public interface GroupDAO {
 	public void saveGroup(Group theGroup);
 
 	public Group getGroup(int groupId);
+
+	public void deleteGroup(int groupId);
+
+	public List<Group> searchGroup(String theSearchName);
 }

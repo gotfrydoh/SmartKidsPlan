@@ -9,4 +9,10 @@ public interface GroupService {
 	public List<Group> getGroups();
 
 	public void saveGroup(Group theGroup);
+
+	public void deleteGroup(int groupId);
+
+	public Group getGroup(int groupId);
+
+	public List<Group> searchGroup(String theSearchName);
 }

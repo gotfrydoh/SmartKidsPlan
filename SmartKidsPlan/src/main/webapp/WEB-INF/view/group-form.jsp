@@ -29,9 +29,9 @@
 
 		<form:form action="saveGroup" modelAttribute="group" method="POST">
 
-			<!-- need to associate this data with customer id -->
+			<!-- need to associate this data with group id -->
 			<form:hidden path="id" />
-
+			
 			<table>
 				<tbody>
 					<tr>
@@ -54,29 +54,41 @@
 						<td><label>End Time:</label></td>
 						<td><form:input path="endTime" /></td>
 					</tr>
-					
 
-				<tr>
+					<tr>
+						<td><label>Teacher:</label></td>
+						<td>
+						
+							<form:select path="teacher.id">
+								<c:forEach var="tempTeacher" items="${teachers}">
+									<form:option value="${tempTeacher.id}" label="${tempTeacher.firstName} ${tempTeacher.lastName}" />
+								</c:forEach>
+								
+							</form:select></td>
+					</tr>
+
+
+					<tr>
 						<td><label></label></td>
 						<td><input type="submit" value="Save" class="save" /></td>
 					</tr>
 
-				
+
 				</tbody>
 			</table>
-		
-		
+
+
 		</form:form>
-	
-		<div style="clear; both;"></div>
-		
+
+		<div style=""></div>
+
 		<p>
-			<a href="${pageContext.request.contextPath}/group/list">Back to List</a>
+			<a href="${pageContext.request.contextPath}/group/list">Back to
+				List</a>
 		</p>
-	
+
 	</div>
 
 </body>
 
 </html>
-				

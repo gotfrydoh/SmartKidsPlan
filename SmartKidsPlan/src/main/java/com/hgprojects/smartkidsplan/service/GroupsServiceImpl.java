@@ -29,4 +29,25 @@ public class GroupsServiceImpl implements GroupService {
 		groupDAO.saveGroup(theGroup);
 	}
 
+
+	@Override
+	@Transactional
+	public void deleteGroup(int groupId) {
+		groupDAO.deleteGroup(groupId);
+	}
+
+
+	@Override
+	@Transactional
+	public Group getGroup(int groupId) {
+		return  groupDAO.getGroup(groupId);
+	}
+
+
+	@Override
+	@Transactional
+	public List<Group> searchGroup(String theSearchName) {
+		return groupDAO.searchGroup(theSearchName);
+	}
+
 }
