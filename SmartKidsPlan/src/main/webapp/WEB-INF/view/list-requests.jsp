@@ -1,13 +1,12 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
 
 <head>
-	<title>List Customers</title>
+	<title>List Requests</title>
 	
 	<!-- reference our style sheet -->
 
@@ -21,7 +20,7 @@
 
 	<div id="wrapper">
 		<div id="header">
-			<h2>CRM - Children Relationship Manager</h2>
+			<h2>Request Manager</h2>
 		</div>
 	</div>
 	
@@ -29,16 +28,16 @@
 	
 		<div id="content">
 		
-			<!-- put new button: Add Child -->
+			<!-- put new button: Add Parent -->
 		
-			<input type="button" value="Add Child"
+			<input type="button" value="Add Request"
 				   onclick="window.location.href='showFormForAdd'; return false;"
 				   class="add-button"
 			/>
 
 			<!--  add a search box -->
 			<form:form action="search" method="GET">
-                Search child: <input type="text" name="theSearchName" />
+                Search request: <input type="text" name="theSearchName" />
 
 				<input type="submit" value="Search" class="add-button" />
 			</form:form>
@@ -47,43 +46,38 @@
 		
 			<table>
 				<tr>
-					<th>First Name</th>
-					<th>Last Name</th>
-					<th>PESEL</th>
-					<th>Date of birth</th>
+					<th>Start Time</th>
+					<th>End Time</th>
+					<th>Date</th>
+					<th>Caretaker</th>
 					<th>Action</th>
 				</tr>
 				
 				<!-- loop over and print our customers -->
-				<c:forEach var="tempChild" items="${children}">
+				<c:forEach var="tempRequest" items="${requests}">
 					
 					<!-- construct an update link with child id -->
-					<c:url var="updateLink" value="/child/showFormForUpdate">
-						<c:param name="childId" value="${tempChild.id }"/>
+					<c:url var="updateLink" value="/request/showFormForUpdate">
+						<c:param name="requestId" value="${tempRequest.id }"/>
 					</c:url>
 					
 					<!-- construct delete link with child id -->
-					<c:url var="deleteLink" value="/child/delete">
-						<c:param name="childId" value="${tempChild.id }" />
-					</c:url>
-					
-					<!-- construct an parents' link with child id -->
-					<c:url var="childCaretakersLink" value="/child/getChildCaretakers">
-						<c:param name="childId" value="${tempChild.id }"/>
+					<c:url var="deleteLink" value="/request/delete">
+						<c:param name="requestId" value="${tempRequest.id }" />
 					</c:url>
 
+
 					<tr>
-						<td> ${tempChild.firstName}</td>
-						<td> ${tempChild.lastName}</td>
-						<td> ${tempChild.pesel}</td>
-						<td> ${tempChild.dateOfBirth}</td>
-						
-						
+						<td> ${tempRequest.startTime}</td>
+						<td> ${tempRequest.endTime}</td>
+						<td> ${tempRequest.dateOfAttendance}</td>
+						<td> ${tempRequest.caretaker.firstName} ${tempRequest.caretaker.lastName}</td>
 						<td>
-							<!-- displaying the update link  --> <a href="${updateLink}">Update</a>
-							| <a href="${deleteLink}"
-							onclick="if (!(confirm('Are you sure you want to delete this child?'))) return false">Delete</a>
-							| <a href="${childCaretakersLink}">Caretakers</a>
+							<!-- displaying the update link  -->
+							<a href="${updateLink}">Update</a>
+							|
+						<a href="${deleteLink}"
+							   onclick="if (!(confirm('Are you sure you want to delete this caretaker?'))) return false">Delete</a>
 						</td>
 						
 					</tr>

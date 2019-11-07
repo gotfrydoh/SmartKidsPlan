@@ -12,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.JoinColumn;
 
@@ -37,48 +38,30 @@ public class Caretaker {
 	@Column(name="phone_number")
 	private long phoneNumber;
 
-	@ManyToMany(fetch=FetchType.EAGER, cascade={CascadeType.PERSIST, CascadeType.DETACH,CascadeType.MERGE,CascadeType.REFRESH})
-	@JoinTable(
-			name="caretaker_child",
-			joinColumns=@JoinColumn(name="caretaker_id"),
-			inverseJoinColumns=@JoinColumn(name="child_id")
-			)
-	private List<Child> children;
 	
+	@OneToMany(mappedBy="caretaker",fetch=FetchType.EAGER, cascade={CascadeType.PERSIST, CascadeType.DETACH,CascadeType.MERGE,CascadeType.REFRESH})
+	private List<Request> requests;
 	
 	public Caretaker() {
 		
 	}
 	
-	
-	//add a convenience method to addinf children to parent
-	public void addChild(Child theChild) {
-		
-		if(children==null) {
-			children = new ArrayList<>();
+	public void addRequest(Request tempRequest) {
+		if(requests == null) {
+			requests = new ArrayList<>();
 		}
-		children.add(theChild);
+		requests.add(tempRequest);
+		tempRequest.setCaretaker(this);
 	}
 	
-	public void removeChild(Child theChild) {
-		
-		if(children!=null) {
-			for(int i=0; i<children.size(); i++) {
-				if(theChild.getId()==children.get(i).getId()) {
-					children.remove(i);
-					i--;
-				}
-			}
-		}
-	}
+
 	
-	
-	public List<Child> getChildren() {
-		return children;
+	public List<Request> getRequests() {
+		return requests;
 	}
 
-	public void setChildren(List<Child> children) {
-		this.children = children;
+	public void setRequests(List<Request> requests) {
+		this.requests = requests;
 	}
 
 

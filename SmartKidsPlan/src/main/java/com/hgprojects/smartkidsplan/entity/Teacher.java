@@ -1,5 +1,6 @@
 package com.hgprojects.smartkidsplan.entity;
 
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,33 +32,33 @@ public class Teacher {
 	@Column(name="pesel")
 	private int pesel;
 
-	@OneToMany(mappedBy="teacher",fetch=FetchType.EAGER, cascade={CascadeType.PERSIST, CascadeType.DETACH,CascadeType.MERGE,CascadeType.REFRESH})
-	private List<Group> groups;
 
+	@OneToMany(mappedBy="teacher",fetch=FetchType.EAGER, cascade={CascadeType.PERSIST, CascadeType.DETACH,CascadeType.MERGE,CascadeType.REFRESH})
+	private List<Register> registers;
+	
+	
 	public Teacher() {
 		
 	}
 	
-
-	public void addGroup(Group tempSession) {
-		if(groups == null) {
-			groups = new ArrayList<>();
+	
+	public long countWorkedMinutes() {
+		List<Register> registers = getRegisters();
+		long minutesWorked=0;
+		for(Register tempRegister : registers) {
+			long elapsedMinutes = Duration.between(tempRegister.getStartTime(), tempRegister.getEndTime()).toMinutes();
+			minutesWorked = elapsedMinutes+minutesWorked;
 		}
-		groups.add(tempSession);
-		tempSession.setTeacher(this);
+		return minutesWorked;
 	}
 	
 	
-	public void removeGroup(Group tempGroup) {
-		if(groups != null) {
-			for(int i=0;i<groups.size();i++) {
-				if(tempGroup.getId() == groups.get(i).getId()) {
-					tempGroup.setTeacher(null);
-					groups.remove(i);
-					i--;
-				}
-			}
+	public void addRegister(Register tempRegister) {
+		if(registers == null) {
+			registers = new ArrayList<>();
 		}
+		registers.add(tempRegister);
+		tempRegister.setTeacher(this);
 	}
 
 	public Teacher(String firstName, String lastName, int pesel) {
@@ -68,15 +69,6 @@ public class Teacher {
 	}
 
 
-
-	public List<Group> getGroups() {
-		return groups;
-	}
-
-
-	public void setGroups(List<Group> groups) {
-		this.groups = groups;
-	}
 
 
 	public int getId() {
@@ -116,6 +108,16 @@ public class Teacher {
 
 	public void setPesel(int pesel) {
 		this.pesel = pesel;
+	}
+
+
+	public List<Register> getRegisters() {
+		return registers;
+	}
+
+
+	public void setRegisters(List<Register> registers) {
+		this.registers = registers;
 	}
 
 

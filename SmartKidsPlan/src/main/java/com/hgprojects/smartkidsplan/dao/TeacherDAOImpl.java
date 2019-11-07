@@ -8,7 +8,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.hgprojects.smartkidsplan.entity.Child;
+import com.hgprojects.smartkidsplan.entity.Register;
 import com.hgprojects.smartkidsplan.entity.Teacher;
 
 @Repository
@@ -53,7 +53,6 @@ public class TeacherDAOImpl implements TeacherDAO {
 	@Override
 	public void deleteTeacher(int theId) {
 		Session currentSession = sessionFactory.getCurrentSession();
-		
 		Query theQuery = currentSession.createQuery("delete from Teacher where id=:teacherId");
 		theQuery.setParameter("teacherId", theId);
 		theQuery.executeUpdate();

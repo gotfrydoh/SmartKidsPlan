@@ -7,9 +7,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.hgprojects.smartkidsplan.dao.CaretakerDAO;
-import com.hgprojects.smartkidsplan.dao.ChildDAO;
 import com.hgprojects.smartkidsplan.entity.Caretaker;
-import com.hgprojects.smartkidsplan.entity.Child;
+
 
 @Service
 public class CaretakerServiceImpl implements CaretakerService {
@@ -17,10 +16,7 @@ public class CaretakerServiceImpl implements CaretakerService {
 	//need to inject caretaker DAO
 	@Autowired
 	private CaretakerDAO caretakerDAO;
-	
-	@Autowired
-	private ChildDAO childDAO;
-	
+		
 	
 	@Override
 	@Transactional
@@ -53,28 +49,8 @@ public class CaretakerServiceImpl implements CaretakerService {
 		return caretakerDAO.searchCaretaker(theSearchName);
 	}
 
-	@Override
-	@Transactional
-	public List<Child> getChildren(int theId) {
-		return caretakerDAO.getChildren(theId);
-	}
 
-	@Override
-	@Transactional
-	public void addChildToCaretaker(int caretakerId, int childId) {
-		Child tempChild = childDAO.getChild(childId);
-		Caretaker tempCaretaker = caretakerDAO.getCaretaker(caretakerId);
-		tempCaretaker.addChild(tempChild);
-		
-	}
 
-	@Override
-	@Transactional
-	public void removeChildFromCaretaker(int caretakerId, int childId) {
-		Child tempChild = childDAO.getChild(childId);
-		Caretaker tempCaretaker = caretakerDAO.getCaretaker(caretakerId);
-		tempCaretaker.removeChild(tempChild);
-	}
 
 	
 

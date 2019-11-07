@@ -6,7 +6,7 @@
 <html>
 
 <head>
-	<title>List Caretakers</title>
+	<title>List Registers</title>
 	
 	<!-- reference our style sheet -->
 
@@ -20,7 +20,7 @@
 
 	<div id="wrapper">
 		<div id="header">
-			<h2>PRM - Parents Relationship Manager</h2>
+			<h2>Register Manager</h2>
 		</div>
 	</div>
 	
@@ -28,16 +28,25 @@
 	
 		<div id="content">
 		
-			<!-- put new button: Add Parent -->
 		
-			<input type="button" value="Add Caretaker"
+			<input type="button" value="Add Register"
 				   onclick="window.location.href='showFormForAdd'; return false;"
+				   class="add-button"
+			/>
+			
+			<input type="button" value="Update list"
+				   onclick="window.location.href='updateList'; return false;"
+				   class="add-button"
+			/>
+			
+			<input type="button" value="Set Teachers"
+				   onclick="window.location.href='setTeachersExtraHours'; return false;"
 				   class="add-button"
 			/>
 
 			<!--  add a search box -->
 			<form:form action="search" method="GET">
-                Search caretaker: <input type="text" name="theSearchName" />
+                Search register: <input type="text" name="theSearchName" />
 
 				<input type="submit" value="Search" class="add-button" />
 			</form:form>
@@ -46,41 +55,47 @@
 		
 			<table>
 				<tr>
-					<th>First Name</th>
-					<th>Last Name</th>
-					<th>PESEL</th>
-					<th>Phone number</th>
+					<th>Name</th>
+					<th>Description</th>
+					<th>Start Time</th>
+					<th>End Time</th>
+					<th>Date</th>
+					<th>Teacher</th>
 					<th>Action</th>
 				</tr>
 				
 				<!-- loop over and print our customers -->
-				<c:forEach var="tempCaretaker" items="${caretakers}">
+				<c:forEach var="tempRegister" items="${registers}">
 					
 					<!-- construct an update link with child id -->
-					<c:url var="updateLink" value="/caretaker/showFormForUpdate">
-						<c:param name="caretakerId" value="${tempCaretaker.id }"/>
+					<c:url var="updateLink" value="/register/showFormForUpdate">
+						<c:param name="registerId" value="${tempRegister.id }"/>
 					</c:url>
 					
 					<!-- construct delete link with child id -->
-					<c:url var="deleteLink" value="/caretaker/delete">
-						<c:param name="caretakerId" value="${tempCaretaker.id }" />
+					<c:url var="deleteLink" value="/register/delete">
+						<c:param name="registerId" value="${tempRegister.id }" />
 					</c:url>
 
-					<c:url var="addChildLink" value="/caretaker/showFormForAddChild">
-						<c:param name="caretakerId" value="${tempCaretaker.id }" />
+					<c:url var="addTeacherLink" value="/register/showFormForAddTeacher">
+						<c:param name="registerId" value="${tempRegister.id }" />
 					</c:url>
 
 					<tr>
-						<td> ${tempCaretaker.firstName}</td>
-						<td> ${tempCaretaker.lastName}</td>
-						<td> ${tempCaretaker.pesel}</td>
-						<td> ${tempCaretaker.phoneNumber}</td>
+						<td> ${tempRegister.name}</td>
+						<td> ${tempRegister.description}</td>
+						<td> ${tempRegister.startTime}</td>
+						<td> ${tempRegister.endTime}</td>
+						<td> ${tempRegister.dateOfAttendance}</td>
+						<td> ${tempRegister.teacher.firstName} ${tempRegister.teacher.lastName}</td>
 						<td>
 							<!-- displaying the update link  -->
 							<a href="${updateLink}">Update</a>
 							|
 						<a href="${deleteLink}"
 							   onclick="if (!(confirm('Are you sure you want to delete this caretaker?'))) return false">Delete</a>
+							|
+							<a href="${addTeacherLink}">Set Teacher</a>
 						</td>
 						
 					</tr>

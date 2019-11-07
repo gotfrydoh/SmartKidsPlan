@@ -6,10 +6,7 @@
 </head>
 
 <body>
-	<p>
-		<a href="${pageContext.request.contextPath}/child/list">Children
-			List</a>
-	</p>
+	
 
 	<p>
 		<a href="${pageContext.request.contextPath}/teacher/list">Teachers
@@ -22,7 +19,11 @@
 	</p>
 
 	<p>
-		<a href="${pageContext.request.contextPath}/group/list">Group
+		<a href="${pageContext.request.contextPath}/register/list">Register
+			List</a>
+	</p>
+	<p>
+		<a href="${pageContext.request.contextPath}/request/list">Request
 			List</a>
 	</p>
 

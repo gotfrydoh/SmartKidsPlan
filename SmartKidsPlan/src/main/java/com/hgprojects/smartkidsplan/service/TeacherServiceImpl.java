@@ -1,5 +1,6 @@
 package com.hgprojects.smartkidsplan.service;
 
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,8 +8,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.hgprojects.smartkidsplan.dao.TeacherDAO;
-import com.hgprojects.smartkidsplan.dao.GroupDAO;
-import com.hgprojects.smartkidsplan.entity.Group;
 import com.hgprojects.smartkidsplan.entity.Teacher;
 
 @Service
@@ -19,8 +18,7 @@ public class TeacherServiceImpl implements TeacherService {
 	@Autowired
 	private TeacherDAO teacherDAO;
 	
-	@Autowired
-	private GroupDAO groupDAO;
+
 	
 	@Override
 	@Transactional
@@ -44,7 +42,6 @@ public class TeacherServiceImpl implements TeacherService {
 	@Transactional
 	public void deleteTeacher(int theId) {
 		teacherDAO.deleteTeacher(theId);
-		
 	}
 
 	@Override
@@ -53,26 +50,6 @@ public class TeacherServiceImpl implements TeacherService {
 		return teacherDAO.searchTeacher(theSearchName);
 	}
 
-	@Override
-	@Transactional
-	public void addGroupToTeacher(int teacherId, int groupId) {
-		Teacher theTeacher = teacherDAO.getTeacher(teacherId);
-		Group theGroup = groupDAO.getGroup(groupId);
-		theTeacher.addGroup(theGroup);
-		
-	}
-
-	@Override
-	@Transactional
-	public void removeGroupFromTeacher(int teacherId, int groupId) {
-		Group tempGroup = groupDAO.getGroup(groupId);
-		Teacher tempTeacher = teacherDAO.getTeacher(teacherId);
-		tempTeacher.removeGroup(tempGroup);
-		
-	}
-
-	
-	
 	
 	
 }

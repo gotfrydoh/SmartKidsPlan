@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.hgprojects.smartkidsplan.entity.Caretaker;
-import com.hgprojects.smartkidsplan.entity.Child;
+
 
 @Repository
 public class CaretakerDAOImpl implements CaretakerDAO {
@@ -80,13 +80,6 @@ public class CaretakerDAOImpl implements CaretakerDAO {
 	}
 
 
-	@Override
-	public List<Child> getChildren(int theId) {
-		Session currentSession = sessionFactory.getCurrentSession();
-		Caretaker theCaretaker = currentSession.get(Caretaker.class, theId);
-		List<Child> children = theCaretaker.getChildren();
-		return children;
-	}
 
 
 	

@@ -3,7 +3,7 @@ package com.hgprojects.smartkidsplan.dao;
 import java.util.List;
 
 import com.hgprojects.smartkidsplan.entity.Caretaker;
-import com.hgprojects.smartkidsplan.entity.Child;
+
 
 public interface CaretakerDAO {
 
@@ -17,7 +17,7 @@ public interface CaretakerDAO {
 
 	public List<Caretaker> searchCaretaker(String theSearchName);
 
-	public List<Child> getChildren(int theId);
+
 
 
 }

@@ -80,8 +80,6 @@
 							|
 						<a href="${deleteLink}"
 							   onclick="if (!(confirm('Are you sure you want to delete this teacher?'))) return false">Delete</a>
-							   |
-							   <a href="${groupLink}">Groups</a>
 						</td>
 						
 					</tr>
