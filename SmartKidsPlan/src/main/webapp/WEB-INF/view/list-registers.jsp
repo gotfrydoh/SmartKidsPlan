@@ -80,6 +80,10 @@
 					<c:url var="addTeacherLink" value="/register/showFormForAddTeacher">
 						<c:param name="registerId" value="${tempRegister.id }" />
 					</c:url>
+					
+					<c:url var="requestsLink" value="/register/requests">
+						<c:param name="registerId" value="${tempRegister.id }" />
+					</c:url>
 
 					<tr>
 						<td> ${tempRegister.name}</td>
@@ -96,6 +100,8 @@
 							   onclick="if (!(confirm('Are you sure you want to delete this caretaker?'))) return false">Delete</a>
 							|
 							<a href="${addTeacherLink}">Set Teacher</a>
+							|
+							<a href="${requestsLink}">Requests</a>
 						</td>
 						
 					</tr>

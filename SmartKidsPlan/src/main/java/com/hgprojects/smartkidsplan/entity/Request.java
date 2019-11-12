@@ -41,6 +41,10 @@ public class Request {
 	@ManyToOne(cascade={CascadeType.PERSIST, CascadeType.DETACH,CascadeType.MERGE,CascadeType.REFRESH})
 	@JoinColumn(name="caretaker_id")
 	private Caretaker caretaker;
+	
+	@ManyToOne(cascade={CascadeType.PERSIST, CascadeType.DETACH,CascadeType.MERGE,CascadeType.REFRESH})
+	@JoinColumn(name="register_id")
+	private Register register;
 
 	public Request() {
 		
@@ -52,6 +56,16 @@ public class Request {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+	
+	
+
+	public Register getRegister() {
+		return register;
+	}
+
+	public void setRegister(Register register) {
+		this.register = register;
 	}
 
 	public LocalTime getStartTime() {
@@ -90,8 +104,10 @@ public class Request {
 	@Override
 	public String toString() {
 		return "Request [id=" + id + ", startTime=" + startTime + ", endTime=" + endTime + ", dateOfAttendance="
-				+ dateOfAttendance + ", caretaker=" + caretaker + "]";
+				+ dateOfAttendance + ", caretaker=" + caretaker + ", register=" + register + "]";
 	}
+
+
 
 	
 	

@@ -84,7 +84,7 @@ public class RequestDAOImpl implements RequestDAO {
 	@Override
 	public List<Request> getRequestsAfterDate(Date theDate) {
 		Session currentSession = sessionFactory.getCurrentSession();
-		Query theQuery = currentSession.createQuery("from Request where dateOfAttendance>=:theDate order by dateOfAttendance");
+		Query theQuery = currentSession.createQuery("from Request where dateOfAttendance>=:theDate and register is null order by dateOfAttendance");
 		theQuery.setParameter("theDate", theDate);
 		List<Request> requests = theQuery.getResultList();	
 		return requests;

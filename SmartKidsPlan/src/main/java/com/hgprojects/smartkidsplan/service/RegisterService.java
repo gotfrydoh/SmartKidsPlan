@@ -3,6 +3,7 @@ package com.hgprojects.smartkidsplan.service;
 import java.util.List;
 
 import com.hgprojects.smartkidsplan.entity.Register;
+import com.hgprojects.smartkidsplan.entity.Request;
 import com.hgprojects.smartkidsplan.entity.Teacher;
 
 public interface RegisterService {
@@ -20,5 +21,7 @@ public interface RegisterService {
 	public List<Register> getNullTeacherRegisters();
 
 	public void setTeacherToRegister(Register register, Teacher minHoursTeacher);
+
+	public void addRequestToRegister(Register tempRegister, Request tempRequest);
 	
 }

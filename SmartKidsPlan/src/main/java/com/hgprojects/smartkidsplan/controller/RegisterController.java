@@ -94,6 +94,18 @@ public class RegisterController {
 		return "setTeacher-register-form";
 	}
 	
+	
+	@GetMapping("/requests")
+	public String showRequests(@RequestParam("registerId") int theId, Model theModel) {
+		Register theRegister = registerService.getRegister(theId);
+		List<Request> requests = theRegister.getRequests();
+		theModel.addAttribute("requests", requests);
+		return "list-register-requests";
+	}
+	
+	
+	
+	
 	@GetMapping("/updateList")
 	public String updateList(Model theModel) {
 		Calendar cal = Calendar.getInstance();
@@ -106,6 +118,11 @@ public class RegisterController {
 		LocalTime startExtraHours = LocalTime.of(16, 0);
 		List<Request> selectedRequests = new ArrayList<>();
 		List<Request> requests = requestService.getRequestsAfterDate(theDate);
+		//requests.get(0).setRegister(registerService.getRegister(136));
+		for(Request tempRequest : requests) {
+			System.out.println("Temp request's register: " + tempRequest.getRegister());
+		}
+		
 		while(requests.size() > 0) {
 			tempDate = requests.get(0).getDateOfAttendance();
 			for(int i=0; i<requests.size(); i++) {
@@ -124,7 +141,15 @@ public class RegisterController {
 				}
 			}
 			Register tempRegister = new Register("nadgodziny","popoludnie",startExtraHours,maxEndTime,tempDate);
+			Request temporaryRequest;
 			registerService.saveRegister(tempRegister);
+			for(int i=0; i<selectedRequests.size(); i++) {
+				temporaryRequest = requestService.getRequest(selectedRequests.get(i).getId());
+				temporaryRequest.setRegister(tempRegister);
+				System.out.println("\ntemporary request - register: " + temporaryRequest.getRegister());
+				requestService.saveRequest(temporaryRequest);
+			}
+			
 			for(int i=0; i < selectedRequests.size(); i++) {
 				selectedRequests.remove(i);
 				i--;
@@ -140,7 +165,7 @@ public class RegisterController {
 		List<Register> nullTeacherRegisters = registerService.getNullTeacherRegisters();
 		Teacher minHoursTeacher;
 		long minutesWorked;
-		
+		System.out.println("\nNull teachers: " + nullTeacherRegisters);
 		for(int i=0; i<nullTeacherRegisters.size(); i++) {
 			minHoursTeacher = teachers.get(0);
 			minutesWorked = minHoursTeacher.countWorkedMinutes();

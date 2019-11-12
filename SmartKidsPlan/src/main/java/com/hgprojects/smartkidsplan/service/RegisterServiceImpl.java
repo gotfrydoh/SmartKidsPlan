@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.hgprojects.smartkidsplan.dao.RegisterDAO;
 import com.hgprojects.smartkidsplan.entity.Register;
+import com.hgprojects.smartkidsplan.entity.Request;
 import com.hgprojects.smartkidsplan.entity.Teacher;
 
 
@@ -66,6 +67,16 @@ public class RegisterServiceImpl implements RegisterService {
 	public void setTeacherToRegister(Register register, Teacher minHoursTeacher) {
 		register.setTeacher(minHoursTeacher);
 		minHoursTeacher.addRegister(register);
+	}
+
+
+	@Override
+	@Transactional
+	public void addRequestToRegister(Register tempRegister, Request tempRequest) {
+		tempRegister.addRequest(tempRequest);
+		tempRequest.setRegister(tempRegister);
+		
+		
 	}
 
 }

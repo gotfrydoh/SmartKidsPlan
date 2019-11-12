@@ -8,6 +8,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -50,8 +51,7 @@ public class Register {
 	@JoinColumn(name="teacher_id")
 	private Teacher teacher;
 
-	@OneToMany(cascade={CascadeType.PERSIST, CascadeType.DETACH,CascadeType.MERGE,CascadeType.REFRESH})
-	@JoinColumn(name="register_id")
+	@OneToMany(mappedBy="register",fetch=FetchType.EAGER, cascade={CascadeType.PERSIST, CascadeType.DETACH,CascadeType.MERGE,CascadeType.REFRESH})
 	private List<Request> requests;
 	
 	
@@ -60,6 +60,7 @@ public class Register {
 			requests = new ArrayList<>();
 		}
 		requests.add(tempRequest);
+		tempRequest.setRegister(this);
 	}
 	
 	
