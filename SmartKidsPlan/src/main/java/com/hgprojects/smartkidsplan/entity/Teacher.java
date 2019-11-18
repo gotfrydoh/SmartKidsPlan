@@ -14,6 +14,9 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 @Entity
 @Table(name="teacher")
 public class Teacher {
@@ -33,8 +36,13 @@ public class Teacher {
 	private int pesel;
 
 
-	@OneToMany(mappedBy="teacher",fetch=FetchType.EAGER, cascade={CascadeType.PERSIST, CascadeType.DETACH,CascadeType.MERGE,CascadeType.REFRESH})
+	@OneToMany(mappedBy="teacher", cascade={CascadeType.PERSIST, CascadeType.DETACH,CascadeType.MERGE,CascadeType.REFRESH})
+	@LazyCollection(LazyCollectionOption.FALSE)
 	private List<Register> registers;
+
+	@OneToMany(mappedBy="teacher", cascade={CascadeType.PERSIST, CascadeType.DETACH,CascadeType.MERGE,CascadeType.REFRESH})
+	@LazyCollection(LazyCollectionOption.FALSE)
+	private List<Schedule> schedules;
 	
 	
 	public Teacher() {
@@ -52,6 +60,13 @@ public class Teacher {
 		return minutesWorked;
 	}
 	
+	public void addSchedule(Schedule tempSchedule) {
+		if(schedules == null) {
+			schedules = new ArrayList<>();
+		}
+		schedules.add(tempSchedule);
+		tempSchedule.setTeacher(this);
+	}
 	
 	public void addRegister(Register tempRegister) {
 		if(registers == null) {

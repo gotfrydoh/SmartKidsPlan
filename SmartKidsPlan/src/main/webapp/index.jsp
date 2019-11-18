@@ -26,6 +26,11 @@
 		<a href="${pageContext.request.contextPath}/request/list">Request
 			List</a>
 	</p>
+	
+	<p>
+		<a href="${pageContext.request.contextPath}/schedule/list">Schedule
+			List</a>
+	</p>
 
 </body>
 

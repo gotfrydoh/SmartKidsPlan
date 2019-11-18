@@ -15,5 +15,7 @@ public interface TeacherDAO {
 	public void deleteTeacher(int theId);
 
 	public List<Teacher> searchTeacher(String theSearchName);
+
+	
 	
 }

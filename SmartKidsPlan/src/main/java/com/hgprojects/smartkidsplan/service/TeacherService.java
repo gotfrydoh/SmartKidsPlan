@@ -16,6 +16,8 @@ public interface TeacherService {
 	public void deleteTeacher(int theId);
 
 	public List<Teacher> searchTeacher(String theSearchName);
+
+	public List<Teacher> getDaily2ndShiftTeachers(int dayOfWeek);
 	
 
 }

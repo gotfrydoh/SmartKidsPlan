@@ -118,13 +118,15 @@ public class RegisterController {
 		LocalTime startExtraHours = LocalTime.of(16, 0);
 		List<Request> selectedRequests = new ArrayList<>();
 		List<Request> requests = requestService.getRequestsAfterDate(theDate);
-		//requests.get(0).setRegister(registerService.getRegister(136));
-		for(Request tempRequest : requests) {
-			System.out.println("Temp request's register: " + tempRequest.getRegister());
-		}
+	
 		
 		while(requests.size() > 0) {
+			
 			tempDate = requests.get(0).getDateOfAttendance();
+			Calendar calendar = Calendar.getInstance();
+			calendar.setTime(tempDate);
+			int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
+			if(dayOfWeek != 1 & dayOfWeek != 7) {
 			for(int i=0; i<requests.size(); i++) {
 				int dateValue = requests.get(i).getDateOfAttendance().compareTo(tempDate);
 				if(dateValue == 0) {
@@ -146,7 +148,6 @@ public class RegisterController {
 			for(int i=0; i<selectedRequests.size(); i++) {
 				temporaryRequest = requestService.getRequest(selectedRequests.get(i).getId());
 				temporaryRequest.setRegister(tempRegister);
-				System.out.println("\ntemporary request - register: " + temporaryRequest.getRegister());
 				requestService.saveRequest(temporaryRequest);
 			}
 			
@@ -154,6 +155,12 @@ public class RegisterController {
 				selectedRequests.remove(i);
 				i--;
 				}
+			}
+			
+			else {
+				requests.remove(0);
+			}
+			
 		}
 		return "redirect:/register/list";
 	}
@@ -161,12 +168,18 @@ public class RegisterController {
 	
 	@GetMapping("/setTeachersExtraHours")
 	public String setTeachersExtraHours(Model theModel) {
-		List<Teacher> teachers = teacherService.getTeachers();
+		List<Teacher> teachers;
 		List<Register> nullTeacherRegisters = registerService.getNullTeacherRegisters();
 		Teacher minHoursTeacher;
+		Date dateOfRegister;
 		long minutesWorked;
 		System.out.println("\nNull teachers: " + nullTeacherRegisters);
 		for(int i=0; i<nullTeacherRegisters.size(); i++) {
+			dateOfRegister = nullTeacherRegisters.get(i).getDateOfAttendance();
+			Calendar calendar = Calendar.getInstance();
+			calendar.setTime(dateOfRegister);
+			int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
+			teachers = teacherService.getDaily2ndShiftTeachers(dayOfWeek);
 			minHoursTeacher = teachers.get(0);
 			minutesWorked = minHoursTeacher.countWorkedMinutes();
 			for(Teacher tempTeacher : teachers) {
@@ -177,6 +190,10 @@ public class RegisterController {
 			}
 			registerService.setTeacherToRegister(nullTeacherRegisters.get(i),minHoursTeacher);
 			registerService.saveRegister(nullTeacherRegisters.get(i));
+			for(int j=0; j< teachers.size(); j++) {
+				teachers.remove(j);
+				j--;
+			}
 		}
 		
 		return "redirect:/register/list";

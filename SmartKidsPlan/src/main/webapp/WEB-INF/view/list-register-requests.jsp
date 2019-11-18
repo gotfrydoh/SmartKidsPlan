@@ -39,7 +39,6 @@
 					<th>End Time</th>
 					<th>Date</th>
 					<th>Caretaker</th>
-					<th>Action</th>
 				</tr>
 				
 				<!-- loop over and print our customers -->

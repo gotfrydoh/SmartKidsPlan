@@ -97,7 +97,7 @@
 							<a href="${updateLink}">Update</a>
 							|
 						<a href="${deleteLink}"
-							   onclick="if (!(confirm('Are you sure you want to delete this caretaker?'))) return false">Delete</a>
+							   onclick="if (!(confirm('Are you sure you want to delete this register?'))) return false">Delete</a>
 							|
 							<a href="${addTeacherLink}">Set Teacher</a>
 							|
