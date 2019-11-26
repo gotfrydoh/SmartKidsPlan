@@ -144,13 +144,37 @@ public class RegisterController {
 			}
 			Register tempRegister = new Register("nadgodziny","popoludnie",startExtraHours,maxEndTime,tempDate);
 			Request temporaryRequest;
-			registerService.saveRegister(tempRegister);
-			for(int i=0; i<selectedRequests.size(); i++) {
-				temporaryRequest = requestService.getRequest(selectedRequests.get(i).getId());
-				temporaryRequest.setRegister(tempRegister);
-				requestService.saveRequest(temporaryRequest);
-			}
+			//checking if register exists already in database
+			Register checkedRegister = registerService.getIfExistsDate(tempRegister);
+			if(checkedRegister != null) {
+				if(checkedRegister.getEndTime().compareTo(tempRegister.getEndTime()) >= 0) { //jesli istniejacy register ma czas wiekszy od nowego
+					for(int i=0; i<selectedRequests.size(); i++) {
+						Request tmpRequest = requestService.getRequest(selectedRequests.get(i).getId());
+						tmpRequest.setRegister(checkedRegister);
+						requestService.saveRequest(tmpRequest);
+					}
+				}
+					else {
+						checkedRegister.setEndTime(tempRegister.getEndTime());
+						checkedRegister.setTeacher(null);
+						registerService.saveRegister(checkedRegister);
+						List<Register> registersToChange = registerService.getRegistersAfterDate(checkedRegister.getDateOfAttendance());
+						for(Register reg : registersToChange) {
+							reg.setTeacher(null);
+							registerService.saveRegister(reg);
+						}
+					}
+				}
 			
+			else {
+				registerService.saveRegister(tempRegister);
+				for(int i=0; i<selectedRequests.size(); i++) {
+					temporaryRequest = requestService.getRequest(selectedRequests.get(i).getId());
+					temporaryRequest.setRegister(tempRegister);
+					requestService.saveRequest(temporaryRequest);
+				}
+			
+			}
 			for(int i=0; i < selectedRequests.size(); i++) {
 				selectedRequests.remove(i);
 				i--;

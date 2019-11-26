@@ -1,5 +1,6 @@
 package com.hgprojects.smartkidsplan.service;
 
+import java.util.Date;
 import java.util.List;
 
 import com.hgprojects.smartkidsplan.entity.Register;
@@ -23,5 +24,9 @@ public interface RegisterService {
 	public void setTeacherToRegister(Register register, Teacher minHoursTeacher);
 
 	public void addRequestToRegister(Register tempRegister, Request tempRequest);
+
+	public List<Register> getRegistersAfterDate(Date dateOfAttendance);
+
+	public Register getIfExistsDate(Register tempRegister);
 	
 }

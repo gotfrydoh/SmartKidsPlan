@@ -1,5 +1,6 @@
 package com.hgprojects.smartkidsplan.dao;
 
+import java.util.Date;
 import java.util.List;
 
 import org.hibernate.query.Query;
@@ -81,6 +82,34 @@ public class RegisterDAOImpl implements RegisterDAO {
 		Query theQuery = currentSession.createQuery("from Register where teacher is null");
 		List<Register> registers = theQuery.getResultList();
 		return registers;
+	}
+
+	@Override
+	public List<Register> getRegistersafterDate(Date dateOfAttendance) {
+		Session currentSession = sessionFactory.getCurrentSession();
+		String overHours = "nadgodziny";
+		Query theQuery = currentSession.createQuery("from Register where dateOfAttendance>=:theDate and name=:theName");
+		theQuery.setParameter("theDate", dateOfAttendance);
+		theQuery.setParameter("theName",overHours);
+		List<Register> registers = theQuery.getResultList();
+		return registers;
+	}
+
+	@Override
+	public Register getIfExistsDate(Register tempRegister) {
+		Session currentSession = sessionFactory.getCurrentSession();
+		String overHours = "nadgodziny";
+		Query theQuery = currentSession.createQuery("from Register where dateOfAttendance=:theDate and name=:theName");
+		theQuery.setParameter("theDate", tempRegister.getDateOfAttendance());
+		theQuery.setParameter("theName",overHours);
+		List<Register> registers = theQuery.getResultList();
+		if(registers.size() > 0 ) {
+			return registers.get(0);
+		}
+		else {
+			return null;
+		}
+		
 	}
 
 }

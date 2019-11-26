@@ -1,5 +1,6 @@
 package com.hgprojects.smartkidsplan.service;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -77,6 +78,20 @@ public class RegisterServiceImpl implements RegisterService {
 		tempRequest.setRegister(tempRegister);
 		
 		
+	}
+
+
+	@Override
+	@Transactional
+	public List<Register> getRegistersAfterDate(Date dateOfAttendance) {
+		return registerDAO.getRegistersafterDate(dateOfAttendance);
+	}
+
+
+	@Override
+	@Transactional
+	public Register getIfExistsDate(Register tempRegister) {
+		return registerDAO.getIfExistsDate(tempRegister);
 	}
 
 }

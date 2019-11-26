@@ -1,0 +1,36 @@
+.carousel-item {
+  height: 100vh;
+  min-height: 350px;
+  background: no-repeat center center scroll;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+#f_slide_p {
+	color: black;
+	margin-bottom: 410px;
+}
+
+
+#rd_slide_h {
+	color: black;
+	margin-bottom: 10px;
+}
+
+#rd_slide_p {
+	color: black;
+	margin-bottom: 400px;
+}
+
+
+#nd_slide_h {
+	color: black;
+	margin-bottom: 10px;
+}
+
+#nd_slide_p {
+	color: black;
+	margin-bottom: 400px;
+}
